@@ -26,12 +26,36 @@ def print_board():
 
 def player_turn(player):
     print(f"It's your turn {player.name}!")
-    row = int(input("Which row do you want to play on? "))
-    column = int(input("Which column do you want to play on? "))
-
+    
+    # Get valid row input
+    while True:
+        try:
+            row = int(input("Which row do you want to play on? "))
+            if 1 <= row <= 3:
+                break
+            else:
+                print("Invalid input. Please enter a number between 1 and 3.")
+                player_turn(player)
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            player_turn(player)
+    
+    # Get valid column input
+    while True:
+        try:
+            column = int(input("Which column do you want to play on? "))
+            if 1 <= column <= 3:
+                break
+            else:
+                print("Invalid input. Please enter a number between 1 and 3.")
+                player_turn(player)
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            player_turn(player)
+    
     # Ensure the chosen cell is empty
-    if board[row][column] == []:
-        board[row][column] = player.letter
+    if board[row - 1][column - 1] == []:
+        board[row - 1][column - 1] = player.letter
     else:
         print("Invalid move. The selected cell is already occupied. Try again.")
         player_turn(player)
