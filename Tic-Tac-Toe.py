@@ -83,8 +83,7 @@ def is_board_full():
             return False  # There is an empty cell, the board is not full
     return True  # All cells are occupied, the board is full
 
-def check_win():
-    global player_1, player_2
+def check_win(player_1, player_2):
     if win(player_1):
         print(f"{player_1.name} wins!")
         return True
@@ -113,7 +112,7 @@ def game():
     while not is_winner:
         print_board()
         player_turn(current_player)
-        if check_win():
+        if check_win(player_1, player_2):
             break
         current_player = player_2 if current_player == player_1 else player_1
 
