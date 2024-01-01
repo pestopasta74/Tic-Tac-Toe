@@ -20,9 +20,15 @@ def print_intro():
 ░░░╚═╝░░░╚═╝░╚════╝░░░░░░░░░░╚═╝░░░╚═╝░░╚═╝░╚════╝░░░░░░░░░░╚═╝░░░░╚════╝░╚══════╝╚═╝
     """)
 
-def print_board():
-    for row in board:
-        print(row)
+def print_board(board):
+    print("    1    2    3")
+    print(" +----+----+----+")
+    for i, row in enumerate(board, start=1):
+        print("{}|".format(i), end="")
+        for cell in row:
+            print(f" {cell} |", end="")
+        print("\n +----+----+----+")
+
 
 def player_turn(player):
     print(f"It's your turn {player.name}!")
@@ -100,8 +106,8 @@ def game():
     print_intro()
 
     # Define players and ask for user input
-    player_1 = Player(input("Enter the first player's name: "), "X")
-    player_2 = Player(input("Enter the second player's name: "), "O")
+    player_1 = Player(input("Enter the first player's name: "), "X ")
+    player_2 = Player(input("Enter the second player's name: "), "O ")
 
 
     print(f"\nWelcome to the game {player_1.name} and {player_2.name}!")
@@ -110,7 +116,7 @@ def game():
     current_player = player_1
 
     while not is_winner:
-        print_board()
+        print_board(board)
         player_turn(current_player)
         if check_win(player_1, player_2):
             break
