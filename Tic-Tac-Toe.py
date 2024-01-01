@@ -3,10 +3,6 @@ class Player:
         self.name = name
         self.letter = letter
 
-# Define players and ask for user input
-player_1 = Player(input("Enter the first player's name: "), "X")
-player_2 = Player(input("Enter the second player's name: "), "O")
-
 def print_intro():
     print("""
 ░██╗░░░░░░░██╗███████╗██╗░░░░░░█████╗░░█████╗░███╗░░░███╗███████╗░░████████╗░█████╗░
@@ -64,6 +60,7 @@ def is_board_full():
     return True  # All cells are occupied, the board is full
 
 def check_win():
+    global player_1, player_2
     if win(player_1):
         print(f"{player_1.name} wins!")
         return True
@@ -78,6 +75,11 @@ def check_win():
 
 def game():
     print_intro()
+
+    # Define players and ask for user input
+    player_1 = Player(input("Enter the first player's name: "), "X")
+    player_2 = Player(input("Enter the second player's name: "), "O")
+
 
     print(f"\nWelcome to the game {player_1.name} and {player_2.name}!")
     print(f"{player_1.name}, you'll be using {player_1.letter}, and {player_2.name}, you'll be using {player_2.letter}.")
@@ -100,5 +102,3 @@ board = [
 is_winner = False
 
 game()
-
-
