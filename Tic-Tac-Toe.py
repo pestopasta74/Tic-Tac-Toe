@@ -1,23 +1,10 @@
-# Creates a player class for each player
 class Player:
-  def __init__(self, name):
-    self.name = name
+    def __init__(self, name, letter):
+        self.name = name
+        self.letter = letter
 
-# Initialises the board
-board = [
-  [[], [], []],
-  [[], [], []],
-  [[], [], []],
-]
-
-# Function to print the board
-def print_board():
-  for row in board:
-    print(row)
-
-# Print out the introduction to the game
-def intro():
-  print("""
+def print_intro():
+    print("""
 ░██╗░░░░░░░██╗███████╗██╗░░░░░░█████╗░░█████╗░███╗░░░███╗███████╗░░████████╗░█████╗░
 ░██║░░██╗░░██║██╔════╝██║░░░░░██╔══██╗██╔══██╗████╗░████║██╔════╝░░╚══██╔══╝██╔══██╗
 ░╚██╗████╗██╔╝█████╗░░██║░░░░░██║░░╚═╝██║░░██║██╔████╔██║█████╗░░░░░░░██║░░░██║░░██║
@@ -31,31 +18,54 @@ def intro():
 ░░░██║░░░██║██║░░██╗╚════╝░░░██║░░░██╔══██║██║░░██╗╚════╝░░░██║░░░██║░░██║██╔══╝░░╚═╝
 ░░░██║░░░██║╚█████╔╝░░░░░░░░░██║░░░██║░░██║╚█████╔╝░░░░░░░░░██║░░░╚█████╔╝███████╗██╗
 ░░░╚═╝░░░╚═╝░╚════╝░░░░░░░░░░╚═╝░░░╚═╝░░╚═╝░╚════╝░░░░░░░░░░╚═╝░░░░╚════╝░╚══════╝╚═╝
-""")
+    """)
+
+def print_board():
+    for row in board:
+        print(row)
+
+def player_turn(player):
+    print(f"It's your turn {player.name}!")
+    row = int(input("Which row do you want to play on? "))
+    column = int(input("Which column do you want to play on? "))
+    # Add logic to update the board based on player's input
+
+def check_win():
+    # Add logic to check for a win
+    pass
+
+def announce_winner(player):
+    print(f"Congratulations, {player.name}! You've won!")
 
 def game():
-  intro()
-  
-  # Define players and ask for user input
-  player_1 = Player(input("Enter the first players name: "))
-  player_2 = Player(input("Enter the second persons name: "))  
-  
-  # Prints a welcome message
-  print("\nWelcome to the game {player_1_name} and {player_2_name}!".format(player_1_name = player_1.name, player_2_name = player_2.name))
-  
-  is_winner = False
-  current_player = player_1
+    print_intro()
 
-  while is_winner == False:
-    print_board()
-    if current_player == player_1:
-      print("It's your turn {}!".format(player_1.name))
-      input()
-      current_player = player_2
-    else:
-      print("It's your turn {}!".format(player_2.name))
-      input()
-      current_player = player_1
+    # Define players and ask for user input
+    player_1 = Player(input("Enter the first player's name: "), "X")
+    player_2 = Player(input("Enter the second player's name: "), "O")
+
+    print(f"\nWelcome to the game {player_1.name} and {player_2.name}!")
+    print(f"{player_1.name}, you'll be using {player_1.letter}, and {player_2.name}, you'll be using {player_2.letter}.")
+
+    current_player = player_1
+
+    while is_winner == False:
+        print_board()
+        player_turn(current_player)
+        if check_win():
+            announce_winner(current_player)
+            break
+        current_player = player_2 if current_player == player_1 else player_1
+
+
+# Initialises the board
+board = [
+    [[], [], []],
+    [[], [], []],
+    [[], [], []],
+]
+is_winner = False
 
 game()
+
 
